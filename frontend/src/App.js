@@ -1,6 +1,8 @@
 
 import './index.css';
 
+import MouseLight from './MouseLight';
+import solBackground from './SOLAROR BACKGROUND.png'
 import React, { useState, useEffect } from 'react';
 
 
@@ -51,10 +53,26 @@ function NavBar() {
 }
 
 function App() {
+
+  const [glowPosition, setGlowPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (event) => {
+    const rect = event.target.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    setGlowPosition({ x, y });
+  };
+
+
   return (
-    <div className="bg-[#17082A] min-h-screen m-0 p-0">
+    
+    <div className="bg-[#17082A] min-h-screen m-0 p-0 z-0 relative">
+      
+      
+      <MouseLight/>
       <NavBar/>
 
+      <div className="z-10">
       <>
       <div className = "pt-36 object-center text-[#FDFDFD]">
           <div className = "pl-10 text-3xl font-helvetica hover:text-purple-700 transition-colors ease-in-out duration-500">Hi <span>ssss</span>! I'm</div>
@@ -105,21 +123,62 @@ function App() {
       </>
 
       <>
-      <div className = "text-white font-bold text-3xl ml-14 mt-16">My Skills</div> 
-      <div className = "pt-8 h-fit w-full pb-8">
+      <div className = "text-white font-bold text-3xl ml-14 mt-28">My Skills</div> 
+      <div className = "pt-16 h-fit w-full pb-8">
 
-        <div className = "bg-[#ECF0F1] text-2xl hover:text-3xl w-[40%] h-16 hover:w-[50%] ml-14 pb-4 transition-all ease-in-out rounded-tr-3xl hover:rounded-tr-xl rounded-tl-xl hover:rounded-tl-3xl rounded-bl-2xl hover:rounded-bl-sm rounded-br-xl hover:rounded-br-3xl ">
-
+        <div className = "bg-[#ECF0F1] text-2xl hover:text-3xl w-[40%] h-16 hover:w-[50%] ml-14 pb-8 transition-all ease-in-out rounded-tr-3xl hover:rounded-tr-xl rounded-tl-xl hover:rounded-tl-3xl rounded-bl-2xl hover:rounded-bl-sm rounded-br-xl hover:rounded-br-3xl ">
           <div className="p-4 font-bold text-[#333232]">Soft Skills</div>
         </div>
 
+        <div className = "bg-[#ECF0F1] text-xl hover:text-3xl w-[50%] h-16 hover:w-[65%] ml-28 mt-6 pb-8 transition-all ease-in-out rounded-tr-xl hover:rounded-tr-3xl rounded-tl-xl hover:rounded-tl-3xl rounded-bl-sm hover:rounded-bl-3xl rounded-br-3xl hover:rounded-br-sm ">
+          <div className="p-4 font-bold text-[#333232]">Technical Skills</div>
+        </div>
+
+        <div className = "bg-[#ECF0F1] text-xl hover:text-3xl w-[48%] h-16 hover:w-[65%] ml-14  mt-6 pb-4 transition-all ease-in-out rounded-tr-3xl hover:rounded-tr-xl rounded-tl-xl hover:rounded-tl-3xl rounded-bl-2xl hover:rounded-bl-sm rounded-br-xl hover:rounded-br-3xl ">
+          <div className="p-4 font-bold text-[#333232]">Software Skills</div>
+        </div>
+      </div>
+
+      <div className = "text-white font-bold text-2xl ml-28 mr-6 mt-8">Go to My Projects</div> 
+      </>
+
+      {/* projects section  */}
+
+      <>
+      <div className="text-[#FDFDFD] font-bold text-5xl ml-10 mt-40">
+        <p className = "w-fit mb-2 hover:text-[#EE7ACE] transition-all ease-in-out">P</p>
+        <p className = "w-fit mb-2 hover:text-[#EE7ACE] transition-all ease-in-out">R</p>
+        <p className = "w-fit mb-2 hover:text-[#EE7ACE] transition-all ease-in-out">O</p>
+        <p className = "w-fit mb-2 hover:text-[#EE7ACE] transition-all ease-in-out">J</p>
+        <p className = "w-fit mb-2 hover:text-[#EE7ACE] transition-all ease-in-out">E</p>
+        <p className = "w-fit mb-2 hover:text-[#EE7ACE] transition-all ease-in-out ">C</p>
+        <p className = "w-fit mb-2 hover:text-[#EE7ACE] transition-all ease-in-out">T</p>
+        <p className = "w-fit pb-2 hover:text-[#EE7ACE] transition-all ease-in-out">S</p>
 
       </div>
-    
+
       </>
       {/* 
       
        */}
+      
+      </div>
+
+      <div className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"
+        onMouseMove={handleMouseMove}>
+
+      <img src={solBackground} className="absolute top-0 left-0 w-full h-full object-cover -z-10 opacity-10 pointer-events-none" />
+
+      <div
+          className="absolute top-0 left-0 w-full h-full"
+          style={{
+            background: `radial-gradient(circle closest-side, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) ${glowPosition.x}px ${glowPosition.y}px)`,
+          }}
+        ></div>
+
+
+      </div>
+      
   
     
     </div>
